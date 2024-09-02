@@ -85,11 +85,17 @@ export default function EmployeeList() {
   return (
     <>
       {isLoading && <OverlayLoader />} {/* Show loader when loading */}
-      <div className="container mx-auto py-10 relative">
+      <div className="max-w-screen-xl mx-auto py-10 relative">
         {" "}
-        <h1 className="pb-5 font-semibold text-xl">
-          Employee Management Dasboard
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="p-5 font-semibold text-xl">Employee Dashboard</h1>
+          <Link
+            to="/create"
+            className="block md:hidden text-primary-black bg-primary-orange hover:bg-secondary-black hover:text-secondary-orange focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+          >
+            Add User
+          </Link>
+        </div>
         {/* Added relative positioning */}
         <div className="relative overflow-x-auto pb-24">
           <table className="w-full text-sm text-left text-gray-500">

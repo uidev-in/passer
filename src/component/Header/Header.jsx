@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineLogout } from "react-icons/ai";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -44,15 +45,16 @@ export default function Header() {
           <div className="flex items-center lg:order-2">
             <Link
               to="/create"
-              className="text-primary-black bg-primary-orange hover:bg-secondary-black hover:text-secondary-orange focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+              className="hidden md:block text-primary-black bg-primary-orange hover:bg-secondary-black hover:text-secondary-orange focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
               Add User
             </Link>
             {isLoggedIn && (
               <button
                 onClick={handleLogout}
-                className="text-primary-black bg-primary-red hover:bg-secondary-black hover:text-secondary-orange focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 ml-2 focus:outline-none"
+                className="inline-flex items-center justify-center  bg-white text-secondary-black border-2 hover:bg-secondary-orange hover:border-secondary-orange hover:text-secondary-black focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 ml-2 focus:outline-none"
               >
+                <AiOutlineLogout className="mr-2" />
                 Logout
               </button>
             )}
