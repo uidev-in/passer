@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getContactList } from "../../store/slice/contactSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Modal from "../Modal/Modal";
+import Pagination from "../Pagination/Pagination"; // Import Pagination component
 import { HiDotsVertical } from "react-icons/hi";
 import { getInitialLetter } from "../../utills/global";
 import OverlayLoader from "../OverlayLoader/OverlayLoader";
@@ -58,19 +59,17 @@ export default function EmployeeList() {
 
   const totalPages = Math.ceil(contact_list.length / itemsPerPage);
 
-  const nextPage = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
-  };
-
-  const prevPage = () => {
-    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
     <>
       {isLoading && <OverlayLoader />} {/* Show loader when loading */}
-      <div className="container mx-auto py-10">
-        <div className="relative overflow-x-auto">
+      <div className="container mx-auto py-10 relative">
+        {" "}
+        {/* Added relative positioning */}
+        <div className="relative overflow-x-auto pb-24">
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
@@ -98,7 +97,14 @@ export default function EmployeeList() {
                     <div className="w-10 h-10 rounded-full bg-secondary-orange text-primary-grey text-center flex items-center justify-center text-lg">
                       {getInitialLetter(item.name)}
                     </div>
-                    <div>{item.name}</div>
+                    <div>
+                      <Link
+                        to={`/user/${item.id}`}
+                        className="text-primary-grey hover:underline"
+                      >
+                        {item.name}
+                      </Link>
+                    </div>
                   </th>
                   <td className="px-6 py-4">{item.phone}</td>
                   <td className="px-6 py-4">{item.email}</td>
@@ -137,40 +143,14 @@ export default function EmployeeList() {
             </tbody>
           </table>
 
-          {/* Pagination */}
-          <div className="flex justify-between items-center mt-4">
-            <span className="text-sm text-gray-700">
-              Showing{" "}
-              <span className="font-semibold text-gray-900">
-                {indexOfFirstItem + 1}
-              </span>{" "}
-              to{" "}
-              <span className="font-semibold text-gray-900">
-                {Math.min(indexOfLastItem, contact_list.length)}
-              </span>{" "}
-              of{" "}
-              <span className="font-semibold text-gray-900">
-                {contact_list.length}
-              </span>{" "}
-              Entries
-            </span>
-            <div className="inline-flex mt-2 xs:mt-0">
-              <button
-                onClick={prevPage}
-                disabled={currentPage === 1}
-                className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Prev
-              </button>
-              <button
-                onClick={nextPage}
-                disabled={currentPage === totalPages}
-                className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-r hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Next
-              </button>
-            </div>
-          </div>
+          {/* Use Pagination component */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+            itemsPerPage={itemsPerPage}
+            totalItems={contact_list.length}
+          />
 
           <Modal
             open={isModalOpen}
