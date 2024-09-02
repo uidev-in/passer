@@ -13,6 +13,8 @@ import {
   BiSolidTrash,
 } from "react-icons/bi";
 import Modal from "../Modal/Modal";
+import { getInitialLetter } from "../../utills/global";
+import { toast } from "react-hot-toast";
 
 export default function User() {
   const dispatch = useDispatch();
@@ -54,12 +56,17 @@ export default function User() {
         // Perform the delete action
         await dispatch(deleteContactDetails(contactIdToDelete)).unwrap();
 
+        // Show success toast
+        toast.success("Employee deleted successfully!");
+
         // Close the modal and navigate to the home page
         closeDeleteModal();
-        navigate("/"); // Redirect to home after deletion
+        navigate("/employee"); // Redirect to home after deletion
       } catch (error) {
-        console.error("Failed to delete contact: ", error);
-        // Handle any additional error display or logging
+        console.error("Failed to delete Employee: ", error);
+
+        // Show error toast
+        toast.error("Failed to delete Employee. Please try again.");
       }
     }
   };
@@ -70,27 +77,26 @@ export default function User() {
         <div className="my-10 flex justify-center items-center min-h-fit">
           <div className="bg-yellow-50 rounded-lg shadow-lg p-6 max-w-sm w-full">
             <div className="flex flex-col items-center py-4">
-              <img
-                className="mb-3 w-24 h-24 rounded-full border-4 border-gray-200 shadow-md"
-                src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                alt={currentUser.name}
-              />
-              <h3 className="mb-1 text-xl font-semibold text-gray-800">
+              <div className="w-20 h-20 rounded-full bg-secondary-orange font-semibold text-primary-black text-center flex items-center justify-center text-3xl">
+                {getInitialLetter(currentUser.name)}
+              </div>
+              <h3 className="my-2 text-2xl font-semibold text-gray-800">
                 {currentUser.name}
               </h3>
 
-              <div className="p-4 grid grid-cols-1 gap-4 mt-3 text-gray-600 text-sm">
-                <div className="flex items-center">
+              <div className="p-2 grid grid-cols-1 gap-4 mt-1 text-gray-600 text-sm">
+                <div className="flex items-center text-lg">
                   <BiLogoGmail className="text-gray-500 mr-2" />
                   <span>{currentUser.email}</span>
                 </div>
-                <div className="flex items-center">
-                  <BiCreditCardFront className="text-gray-500 mr-2" />
-                  <span>emp_{currentUser.id}</span>
-                </div>
-                <div className="flex items-center">
+
+                <div className="flex items-center text-lg">
                   <BiSolidUserPin className="text-gray-500 mr-2" />
                   <span>{currentUser.username}</span>
+                </div>
+                <div className="flex items-center text-lg">
+                  <BiCreditCardFront className="text-gray-500 mr-2" />
+                  <span>{currentUser.id}</span>
                 </div>
               </div>
 
