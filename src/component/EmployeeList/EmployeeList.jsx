@@ -106,7 +106,7 @@ export default function EmployeeList() {
                       </Link>
                     </div>
                   </th>
-                  <td className="px-6 py-4">{item.phone}</td>
+                  <td className="px-6 py-4">{item.username}</td>
                   <td className="px-6 py-4">{item.email}</td>
                   <td className="px-6 py-4">
                     <div className="relative">
