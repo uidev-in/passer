@@ -38,7 +38,7 @@ export default function Header() {
               alt="Passer Digital Logo"
             />
             <span className="self-center text-xl font-bold whitespace-nowrap">
-              EMD
+              Passer Digital
             </span>
           </div>
           <div className="flex items-center lg:order-2">

@@ -107,7 +107,10 @@ export const contactSlice = createSlice({
       })
       .addCase(getContactList.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.contact_list = action.payload;
+        // state.contact_list = action.payload;
+        state.contact_list = action.payload.sort((a, b) => {
+          return Number(b.id) - Number(a.id); // Sorting by id in descending order (converted to number)
+        });
       })
       .addCase(getContactList.rejected, (state, action) => {
         state.isLoading = false;

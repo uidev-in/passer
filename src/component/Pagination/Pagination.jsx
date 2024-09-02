@@ -18,6 +18,32 @@ export default function Pagination({
     if (currentPage > 1) onPageChange(currentPage - 1);
   };
 
+  const handlePageClick = (pageNumber) => {
+    onPageChange(pageNumber);
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => handlePageClick(i)}
+          className={`px-4 py-2 text-sm font-medium ${
+            i === currentPage
+              ? "text-white bg-gray-800"
+              : "text-gray-700 bg-white hover:bg-gray-200"
+          }`}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return pageNumbers;
+  };
+
   return (
     <div className="flex justify-between items-center mt-4">
       <span className="text-sm text-gray-700">
@@ -36,6 +62,7 @@ export default function Pagination({
         >
           Prev
         </button>
+        {renderPageNumbers()}
         <button
           onClick={nextPage}
           disabled={currentPage === totalPages}
