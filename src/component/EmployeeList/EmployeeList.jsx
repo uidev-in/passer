@@ -88,7 +88,7 @@ export default function EmployeeList() {
       <div className="max-w-screen-xl mx-auto py-10 relative">
         {" "}
         <div className="flex justify-between items-center">
-          <h1 className="p-5 font-semibold text-xl">Employee Dashboard</h1>
+          <h1 className="p-5 font-semibold text-xl">All Employees </h1>
           <Link
             to="/create"
             className="block md:hidden text-primary-black bg-primary-orange hover:bg-secondary-black hover:text-secondary-orange focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
@@ -97,7 +97,7 @@ export default function EmployeeList() {
           </Link>
         </div>
         {/* Added relative positioning */}
-        <div className="relative overflow-x-auto pb-24">
+        <div className="relative overflow-x-auto p-2 md:p-5">
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
@@ -110,7 +110,7 @@ export default function EmployeeList() {
                 <th scope="col" className="px-6 py-3">
                   Email
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3" width="110px">
                   Action
                 </th>
               </tr>
@@ -170,23 +170,21 @@ export default function EmployeeList() {
               ))}
             </tbody>
           </table>
-
-          {/* Use Pagination component */}
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-            itemsPerPage={itemsPerPage}
-            totalItems={contact_list.length}
-          />
-
-          <Modal
-            open={isModalOpen}
-            onClose={closeDeleteModal}
-            userId={contactIdToDelete}
-            confirmAction={handleConfirmDelete}
-          />
         </div>
+        {/* Use Pagination component */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          itemsPerPage={itemsPerPage}
+          totalItems={contact_list.length}
+        />
+        <Modal
+          open={isModalOpen}
+          onClose={closeDeleteModal}
+          userId={contactIdToDelete}
+          confirmAction={handleConfirmDelete}
+        />
       </div>
     </>
   );

@@ -45,8 +45,8 @@ export default function Pagination({
   };
 
   return (
-    <div className="flex justify-between items-center mt-4">
-      <span className="text-sm text-gray-700">
+    <div className="flex flex-col sm:flex-row justify-between items-center  mt-4">
+      <span className="text-sm text-gray-700 mb-2 sm:mb-0">
         Showing{" "}
         <span className="font-semibold text-gray-900">{indexOfFirstItem}</span>{" "}
         to{" "}
@@ -54,7 +54,7 @@ export default function Pagination({
         of <span className="font-semibold text-gray-900">{totalItems}</span>{" "}
         Entries
       </span>
-      <div className="inline-flex mt-2 xs:mt-0">
+      <div className="inline-flex mt-2 xs:mt-0 flex-wrap">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
