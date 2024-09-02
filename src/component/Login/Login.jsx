@@ -38,7 +38,7 @@ export default function Login() {
   return (
     <section className="bg-gray-50 h-[80vh] flex items-center justify-center">
       <Toaster />
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+      <div className="bg-white shadow-lg rounded-lg p-8 m-3 max-w-md w-full">
         <h2 className="text-2xl font-medium pb-5 text-center">
           Hi, Welcome Back!
         </h2>

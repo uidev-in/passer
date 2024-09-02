@@ -5,6 +5,8 @@ import Create from "./pages/Create";
 import Update from "./pages/Update";
 import Employee from "./pages/Employee";
 import User from "./pages/User";
+import NotFound from "./pages/NotFound";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./component/ProtectedRoute/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
@@ -30,6 +32,8 @@ function App() {
             path="/edit/:id"
             element={<ProtectedRoute element={<Update />} />}
           ></Route>
+          <Route path="/404" element={<NotFound />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
