@@ -3,21 +3,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createContact } from "../../store/slice/contactSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
-// Validation schema using Yup
-const validationSchema = Yup.object({
-  name: Yup.string()
-    .required("Full Name is required")
-    .min(2, "Name must be at least 2 characters"),
-  username: Yup.string()
-    .required("Username is required")
-    .min(2, "Username must be at least 2 characters"),
-  email: Yup.string()
-    .required("Email is required")
-    .email("Invalid email format"),
-  role: Yup.string().required("Role is required"),
-});
+import { toast } from "react-hot-toast";
+import { userCreateValidationSchema } from "../../utills/validation";
 
 export default function CreateEmployee() {
   const dispatch = useDispatch();
@@ -27,10 +14,12 @@ export default function CreateEmployee() {
     dispatch(createContact(values))
       .unwrap()
       .then(() => {
+        toast.success("Employee created successfully!");
         navigate("/employee");
       })
       .catch((error) => {
         console.error("Failed to create contact: ", error);
+        toast.error("Failed to create employee. Please try again.");
       })
       .finally(() => {
         setSubmitting(false);
@@ -42,7 +31,7 @@ export default function CreateEmployee() {
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <Formik
           initialValues={{ name: "", username: "", email: "", role: "" }}
-          validationSchema={validationSchema}
+          validationSchema={userCreateValidationSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (

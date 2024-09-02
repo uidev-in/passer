@@ -5,22 +5,11 @@ import {
   getContactList,
 } from "../../store/slice/contactSlice";
 import { useNavigate, useParams } from "react-router-dom";
-import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { toast } from "react-hot-toast";
+import { userUpdateValidationSchema } from "../../utills/validation";
 
 // Yup validation schema
-const validationSchema = Yup.object({
-  name: Yup.string()
-    .required("Full Name is required")
-    .min(2, "Name must be at least 2 characters"),
-  username: Yup.string()
-    .required("Username is required")
-    .min(2, "Username must be at least 2 characters"),
-  email: Yup.string()
-    .required("Email is required")
-    .email("Invalid email format"),
-  role: Yup.string().required("Role is required"),
-});
 
 export default function UpdateContact() {
   const dispatch = useDispatch();
@@ -46,9 +35,19 @@ export default function UpdateContact() {
 
   // Form submission handler
   function handleSubmit(values, { setSubmitting }) {
-    dispatch(updateContactDetails(values));
-    setSubmitting(false);
-    navigate("/employee");
+    dispatch(updateContactDetails(values))
+      .unwrap() // This is to handle promise correctly if using `createAsyncThunk` with `unwrap()`
+      .then(() => {
+        toast.success("Contact updated successfully!"); // Show success toast
+        navigate("/employee");
+      })
+      .catch((error) => {
+        console.error("Failed to update contact: ", error);
+        toast.error("Failed to update contact. Please try again."); // Show error toast
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
   }
 
   if (!currentUser) {
@@ -61,7 +60,7 @@ export default function UpdateContact() {
         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <Formik
             initialValues={currentUser}
-            validationSchema={validationSchema}
+            validationSchema={userUpdateValidationSchema}
             onSubmit={handleSubmit}
             enableReinitialize={true}
           >
