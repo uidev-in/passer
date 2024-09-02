@@ -74,13 +74,13 @@ export default function User() {
   return (
     <>
       {currentUser ? (
-        <div className="my-10 flex justify-center items-center min-h-fit">
+        <div className="m-10  flex justify-center items-center min-h-fit">
           <div className="bg-yellow-50 rounded-lg shadow-lg p-6 max-w-sm w-full">
             <div className="flex flex-col items-center py-4">
               <div className="w-20 h-20 rounded-full bg-secondary-orange font-semibold text-primary-black text-center flex items-center justify-center text-3xl">
                 {getInitialLetter(currentUser.name)}
               </div>
-              <h3 className="my-2 text-2xl font-semibold text-gray-800">
+              <h3 className="my-2 text-2xl font-semibold text-gray-800 capitalize">
                 {currentUser.name}
               </h3>
 
@@ -96,14 +96,14 @@ export default function User() {
                 </div>
                 <div className="flex items-center text-lg">
                   <BiCreditCardFront className="text-gray-500 mr-2" />
-                  <span>{currentUser.id}</span>
+                  <span>PASSER_{currentUser.id}</span>
                 </div>
               </div>
 
               <div className="flex mt-4 space-x-3">
                 <Link
                   to={`/edit/${currentUser.id}`}
-                  className="py-2 px-4 text-sm font-medium text-center text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition duration-300 ease-in-out"
+                  className="py-2 px-4 text-sm font-medium text-center text-white bg-secondary-black rounded-lg shadow hover:bg-secondary-orange hover:text-secondary-black transition duration-300 ease-in-out"
                 >
                   <BiEditAlt className="inline-block mr-1" />
                   Edit
