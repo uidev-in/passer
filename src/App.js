@@ -7,11 +7,13 @@ import Employee from "./pages/Employee";
 import User from "./pages/User";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./component/ProtectedRoute/ProtectedRoute";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <Toaster />
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>

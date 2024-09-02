@@ -1,13 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-
-// Define the validation schema
-const validationSchema = Yup.object({
-  username: Yup.string().required("Username is required"),
-  password: Yup.string().required("Password is required"),
-});
+import { loginValidationSchema } from "../../utills/validation";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,7 +13,7 @@ export default function Login() {
       username: "",
       password: "",
     },
-    validationSchema: validationSchema,
+    validationSchema: loginValidationSchema,
     onSubmit: (values) => {
       if (values.username === "admin" && values.password === "admin") {
         // Successful login for admin
@@ -26,13 +21,17 @@ export default function Login() {
         navigate("/employee");
       } else {
         // Invalid credentials
-        alert("Invalid credentials");
+        toast.error("Invalid credentials", {
+          position: "top-center",
+        });
       }
     },
   });
 
   return (
     <section className="bg-gray-50 h-screen">
+      {/* Include Toaster component to render the toast notifications */}
+      <Toaster />
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           <div>

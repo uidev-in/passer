@@ -27,7 +27,7 @@ export default function CreateEmployee() {
     dispatch(createContact(values))
       .unwrap()
       .then(() => {
-        navigate("/");
+        navigate("/employee");
       })
       .catch((error) => {
         console.error("Failed to create contact: ", error);

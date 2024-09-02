@@ -48,7 +48,7 @@ export default function UpdateContact() {
   function handleSubmit(values, { setSubmitting }) {
     dispatch(updateContactDetails(values));
     setSubmitting(false);
-    navigate("/");
+    navigate("/employee");
   }
 
   if (!currentUser) {
