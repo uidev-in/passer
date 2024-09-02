@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getContactList } from "../../store/slice/contactSlice";
+import {
+  getContactList,
+  deleteContactDetails,
+} from "../../store/slice/contactSlice";
 import { useNavigate, Link } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import Pagination from "../Pagination/Pagination"; // Import Pagination component
 import { HiDotsVertical } from "react-icons/hi";
 import { getInitialLetter } from "../../utills/global";
 import OverlayLoader from "../OverlayLoader/OverlayLoader";
+import { toast } from "react-hot-toast";
 
 export default function EmployeeList() {
   const dispatch = useDispatch();
@@ -31,7 +35,16 @@ export default function EmployeeList() {
   };
 
   const handleConfirmDelete = () => {
-    console.log("Contact with ID deleted successfully.", contactIdToDelete);
+    dispatch(deleteContactDetails(contactIdToDelete))
+      .unwrap()
+      .then(() => {
+        toast.success("Employee deleted successfully!"); // Show success toast
+        dispatch(getContactList()); // Refresh the contact list after deletion
+      })
+      .catch(() => {
+        toast.error("Failed to delete employee. Please try again."); // Show error toast
+      });
+    setIsModalOpen(false);
   };
 
   const openDeleteModal = (contactId) => {
