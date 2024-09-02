@@ -1,9 +1,9 @@
 import Header from "./component/Header/Header";
 import Footer from "./component/Footer/Footer";
-import Home from "./Home";
-import Create from "./Create";
-import Update from "./Update";
-import User from "./User";
+import Home from "./pages/Home";
+import Create from "./pages/Create";
+import Update from "./pages/Update";
+import User from "./pages/User";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
