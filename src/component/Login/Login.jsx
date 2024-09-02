@@ -89,6 +89,9 @@ export default function Login() {
             Login
           </button>
         </form>
+        <p className="my-10 text-primary-grey opacity-70">
+          username : "admin" && pasword : "admin"
+        </p>
       </div>
     </section>
   );
