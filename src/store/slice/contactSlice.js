@@ -4,7 +4,7 @@ import {
   isRejectedWithValue,
 } from "@reduxjs/toolkit";
 
-// const API_ENDPOINT = process.env.EMP_MOCKAPI;
+const API_ENDPOINT = process.env.REACT_APP_API_BASE_URL;
 
 const INIT_STATE = {
   contact_list: [],
@@ -19,14 +19,11 @@ export const createContact = createAsyncThunk(
   "createContact",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        `https://66d58140f5859a704266506c.mockapi.io/api/v1/employee`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/employee`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
       const result = await response.json();
       return result;
     } catch (error) {
@@ -41,9 +38,7 @@ export const getContactList = createAsyncThunk(
   "getContactList",
   async (args, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        `https://66d58140f5859a704266506c.mockapi.io/api/v1/employee`
-      );
+      const response = await fetch(`${API_ENDPOINT}/employee`);
       const result = await response.json();
       return result;
     } catch (error) {
@@ -57,14 +52,11 @@ export const updateContactDetails = createAsyncThunk(
   "updateContactDetails",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        `https://66d58140f5859a704266506c.mockapi.io/api/v1/employee/${data.id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/employee/${data.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
       const result = await response.json();
       return result;
     } catch (error) {
@@ -78,12 +70,9 @@ export const deleteContactDetails = createAsyncThunk(
   "deleteContactDetails",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        `https://66d58140f5859a704266506c.mockapi.io/api/v1/employee/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/employee/${id}`, {
+        method: "DELETE",
+      });
       const result = await response.json();
       return result;
     } catch (error) {
