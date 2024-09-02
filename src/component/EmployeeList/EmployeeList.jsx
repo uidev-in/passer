@@ -68,6 +68,9 @@ export default function EmployeeList() {
       {isLoading && <OverlayLoader />} {/* Show loader when loading */}
       <div className="container mx-auto py-10 relative">
         {" "}
+        <h1 className="pb-5 font-semibold text-xl">
+          Employee Management Dasboard
+        </h1>
         {/* Added relative positioning */}
         <div className="relative overflow-x-auto pb-24">
           <table className="w-full text-sm text-left text-gray-500">

@@ -1,5 +1,5 @@
 import React from "react";
-import EmployeeList from "../component/EmployeeList/EmployeeList";
+import Login from "../component/Login/Login";
 export default function Home() {
-  return <EmployeeList />;
+  return <Login />;
 }
