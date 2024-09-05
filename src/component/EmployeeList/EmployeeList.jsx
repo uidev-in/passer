@@ -57,12 +57,6 @@ export default function EmployeeList() {
     setContactIdToDelete(null);
   };
 
-  // Sort the contact list by latest entries
-  const sortedContactList = [...contact_list].sort((a, b) => {
-    return new Date(b.created_at) - new Date(a.created_at); // Sort by created_at in descending order
-    // Or if using id for sorting: return b.id - a.id;
-  });
-
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
